@@ -1,10 +1,8 @@
-<script setup lang="ts">
-import { generateSudokuValues } from "../../services/core";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <section>
-    <div v-for="cell in generateSudokuValues()">
+    <div v-for="cell in ">
       {{ cell }}
     </div>
   </section>
@@ -19,7 +17,7 @@ section {
   grid-gap: 1px;
 }
 
-section > div {
+div {
   background-color: var(--bg-color-2);
   display: flex;
   align-items: center;
