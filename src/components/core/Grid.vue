@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { inject } from "vue";
-import { storeKey } from "../../model/symbols";
-import { Store } from "../../store";
+import { Store, storeKey } from "../../store";
 
-const store = inject<Store>(storeKey);
+const store = inject<Store>(storeKey)!;
 </script>
 
 <template>
   <section>
-    <div v-for="cell in store?.gameState.cells">
+    <div
+      v-for="cell in store.gameState.cells"
+      :class="cell.isSelected ? 'active' : ''"
+      @click="store.methods.onSelectCell(cell.id)">
       {{ cell.value }}
     </div>
   </section>
@@ -29,5 +31,9 @@ div {
   align-items: center;
   justify-content: center;
   font-size: 3rem;
+}
+
+.active {
+  background-color: var(--bg-color-3);
 }
 </style>

@@ -1,10 +1,14 @@
-import { reactive } from "vue";
+import { reactive, readonly } from "vue";
 import { SudokuState } from "../model/sudoku";
 import { generateInitialSudokuState } from "../services/core";
 
 export interface Store {
     gameState: SudokuState;
-    methods: {};
+    methods: Methods;
+}
+
+interface Methods {
+    onSelectCell: (id: number) => void;
 }
 
 const gameState: SudokuState = reactive({
@@ -20,6 +24,8 @@ const methods = {
 }
 
 export default <Store>{
-    gameState,
+    gameState: readonly(gameState),
     methods
 };
+
+export const storeKey = Symbol("store");
