@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NUMBERS_PAD } from "../model/constants";
+import { NUMBERS_PAD } from "../../model/constants";
 </script>
 
 <template>
