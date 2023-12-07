@@ -1,9 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { inject } from "vue";
+import { storeKey } from "../../model/symbols";
+import { Store } from "../../store";
+
+const store = inject<Store>(storeKey);
+</script>
 
 <template>
   <section>
-    <div v-for="cell in ">
-      {{ cell }}
+    <div v-for="cell in store?.gameState.cells">
+      {{ cell.value }}
     </div>
   </section>
 </template>
