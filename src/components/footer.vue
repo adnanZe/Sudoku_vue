@@ -14,7 +14,6 @@ footer {
   left: 0;
   right: 0;
   padding: 1rem;
-  background-color: rgba(38, 38, 38, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +27,7 @@ i {
 }
 
 a {
-  color: white;
+  color: inherit;
   text-decoration: none;
   display: flex;
   align-items: center;

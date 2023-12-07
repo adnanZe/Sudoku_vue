@@ -15,12 +15,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-}
-
-@media (min-width: 992px) {
-  main {
-    flex-direction: row;
-  }
+  flex-direction: row;
 }
 </style>

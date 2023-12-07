@@ -27,17 +27,17 @@ import { NUMBERS_PAD } from "../../model/constants";
 <style scoped>
 section {
   display: grid;
-  grid-template-columns: repeat(9, 20px);
-  grid-template-rows: repeat(2, 40px);
-  row-gap: 10px;
+  grid-template-columns: repeat(3, 75px);
+  grid-template-rows: repeat(5, 75px);
+  row-gap: 20px;
   column-gap: 5px;
+  margin-left: 30px;
 }
 
 button {
-  background-color: rgb(38, 38, 38);
+  background-color: var(--bg-color-3);
   opacity: 0.8;
-  font-size: 1.5rem;
-  font-weight: lighter;
+  font-size: 2.5rem;
   border: 0;
   border-radius: 10%;
   cursor: pointer;
@@ -50,66 +50,24 @@ button:hover {
 
 .number {
   padding: 0;
-  background-color: transparent;
-  border-radius: 7px;
 }
 
 .undo {
-  grid-column: 4/6;
+  grid-column: 1;
+  grid-row: 2;
 }
-
 .notes {
-  grid-column: 8/10;
+  grid-column: 3;
+  grid-row: 2;
 }
-
 .erase {
-  grid-column: 6/8;
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .new-game {
-  font-size: 1rem;
+  font-size: 2rem;
   background-color: rgba(50, 50, 50, 0.6);
-  color: rgba(217, 217, 217);
-  border-radius: 7px;
   grid-column: 1 / 4;
-}
-
-@media only screen and (min-width: 768px) {
-  section {
-    grid-template-columns: repeat(3, 75px);
-    grid-template-rows: repeat(5, 75px);
-    row-gap: 20px;
-    column-gap: 5px;
-    margin-left: 30px;
-  }
-
-  button {
-    font-size: 2.5rem;
-  }
-  :not(.number) {
-    border-radius: 50%;
-  }
-
-  .number {
-    padding: 0;
-    background-color: rgb(150, 150, 150);
-  }
-
-  .undo {
-    grid-column: 1;
-    grid-row: 2;
-  }
-  .notes {
-    grid-column: 3;
-    grid-row: 2;
-  }
-  .erase {
-    grid-column: 2;
-    grid-row: 2;
-  }
-  .new-game {
-    font-size: 2rem;
-    border-radius: 7px;
-  }
 }
 </style>

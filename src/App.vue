@@ -9,18 +9,3 @@ import Core from "./components/core/Core.vue";
   <Core></Core>
   <Footer></Footer>
 </template>
-
-<style scoped>
-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-@media only screen and (min-width: 992px) {
-  main {
-    flex-direction: row;
-  }
-}
-</style>

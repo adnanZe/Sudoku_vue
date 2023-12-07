@@ -6,12 +6,9 @@
   color-scheme: light dark;
   color: rgb(247, 247, 247);
   background-color: rgb(10, 10, 10);
-  --backgroundColorComponent: rgba(38, 38, 38, 0.6)
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --bg-color: rgb(10, 10, 10);
+  --bg-color-2: rgb(150, 150, 150);
+  --bg-color-3: rgb(50, 50, 50);
 }
 
 body {
