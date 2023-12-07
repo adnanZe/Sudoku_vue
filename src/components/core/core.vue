@@ -10,4 +10,17 @@ import ActionsPad from "./ActionsPad.vue";
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (min-width: 992px) {
+  main {
+    flex-direction: row;
+  }
+}
+</style>
