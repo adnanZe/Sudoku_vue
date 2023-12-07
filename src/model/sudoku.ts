@@ -1,5 +1,6 @@
 export interface SudokuState {
     cells: CellState[];
+    selectedCell: CellState;
 }
 
 export interface CellState {

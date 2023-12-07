@@ -15,7 +15,7 @@ export function generateInitialSudokuState(): CellState[] {
     return values.map((value: string, index: number) => ({
         id: index,
         value,
-        isSelected: false,
+        isSelected: index === 0,
         isReadOnly: value !== "",
         hasAssociatedValue: false,
         hasWrongValue: false,
