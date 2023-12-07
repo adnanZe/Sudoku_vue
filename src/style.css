@@ -6,6 +6,7 @@
   color-scheme: light dark;
   color: rgb(247, 247, 247);
   background-color: rgb(10, 10, 10);
+  --backgroundColorComponent: rgba(38, 38, 38, 0.6)
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
