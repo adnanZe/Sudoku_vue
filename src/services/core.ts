@@ -13,7 +13,7 @@ function generateSudokuValues(): string[] {
 export function generateInitialSudokuState(): CellState[] {
     const values = generateSudokuValues();
 
-    return values.map((value: string, index: number) => ({
+    const firstState = values.map((value: string, index: number) => ({
         id: index,
         value,
         isSelected: index === 0,
@@ -22,4 +22,9 @@ export function generateInitialSudokuState(): CellState[] {
         hasWrongValue: false,
         associatedCellsId: getListOfIdsAssociated(index)
     }));
+
+    return firstState.map((cell: CellState) => ({
+        ...cell,
+        hasAssociatedValue: firstState[0].associatedCellsId.includes(cell.id)
+    }))
 }

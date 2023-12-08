@@ -14,6 +14,7 @@ console.log(store.gameState.cells);
       :class="[
         cell.isSelected ? 'active' : '',
         cell.hasAssociatedValue ? 'associated' : '',
+        cell.isReadOnly ? 'generated' : '',
       ]"
       @click="store.methods.onSelectCell(cell.id)">
       {{ cell.value }}
@@ -37,12 +38,15 @@ div {
   justify-content: center;
   font-size: 3rem;
 }
+.associated {
+  background-color: var(--bg-color-4);
+}
 
 .active {
   background-color: var(--bg-color-3);
 }
 
-.associated {
-  background-color: var(--bg-color-4);
+.generated {
+  color: var(--text-color);
 }
 </style>
