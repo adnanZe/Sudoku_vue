@@ -11,9 +11,10 @@ const store = inject<Store>(storeKey)!;
       v-for="cell in store.gameState.cells"
       :class="[
         cell.isSelected ? 'active' : '',
-        cell.hasAssociatedValue ? 'associated' : '',
+        cell.isAssociated ? 'associated' : '',
         cell.isReadOnly ? 'generated' : '',
         cell.hasWrongValue ? 'wrong' : '',
+        cell.hasAssociatedValue ? 'match-number' : '',
       ]"
       @click="store.methods.onSelectCell(cell.id)">
       {{ cell.value }}
@@ -52,6 +53,10 @@ div {
 
 .generated {
   color: var(--text-color);
+}
+
+.match-number {
+  background-color: var(--bg-color-5);
 }
 
 .wrong {

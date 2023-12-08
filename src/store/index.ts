@@ -22,7 +22,7 @@ const gameState: SudokuState = reactive({
 const methods = {
     onSelectCell: (id: number) => {
         handleSelectCell(id);
-        checkAssociatedCells();
+        checkAssociatedCellsAndMatchingNumbers();
     },
 
     onAddNumber: (value: number) => {
@@ -64,9 +64,10 @@ const checkWrongNumber = () => {
     });
 }
 
-const checkAssociatedCells = () => {
+const checkAssociatedCellsAndMatchingNumbers = () => {
     gameState.cells.forEach(cell => {
-        cell.hasAssociatedValue = gameState.selectedCell.associatedCellsId.includes(cell.id);
+        cell.isAssociated = gameState.selectedCell.associatedCellsId.includes(cell.id);
+        cell.hasAssociatedValue = cell.value ? cell.value === gameState.selectedCell.value : false;
     });
 }
 

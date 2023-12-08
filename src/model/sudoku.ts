@@ -8,6 +8,7 @@ export interface CellState {
     value: string;
     isSelected: boolean;
     isReadOnly: boolean;
+    isAssociated: boolean;
     hasAssociatedValue: boolean;
     hasWrongValue: boolean;
     associatedCellsId: number[];

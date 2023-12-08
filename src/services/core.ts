@@ -18,6 +18,7 @@ export function generateInitialSudokuState(): CellState[] {
         value,
         isSelected: index === 0,
         isReadOnly: value !== "",
+        isAssociated: false,
         hasAssociatedValue: false,
         hasWrongValue: false,
         associatedCellsId: getListOfIdsAssociated(index)
@@ -25,6 +26,6 @@ export function generateInitialSudokuState(): CellState[] {
 
     return firstState.map((cell: CellState) => ({
         ...cell,
-        hasAssociatedValue: firstState[0].associatedCellsId.includes(cell.id)
+        isAssociated: firstState[0].associatedCellsId.includes(cell.id)
     }))
 }
