@@ -15,7 +15,10 @@ const store = inject<Store>(storeKey)!;
     <button id="erase" class="erase" @click="store.methods.onAddNumber('')">
       <i class="fa-solid fa-eraser"></i>
     </button>
-    <button class="notes" id="notes" @click="">
+    <button
+      :class="['notes', store.gameState.isActiveNotes ? 'on' : '']"
+      id="notes"
+      @click="store.methods.onNotes()">
       <i class="fa-solid fa-pencil"></i>
     </button>
     <button
@@ -73,5 +76,25 @@ button:hover {
   font-size: 2rem;
   background-color: rgba(50, 50, 50, 0.6);
   grid-column: 1 / 4;
+}
+
+.notes::before {
+  content: "OFF";
+  position: absolute;
+  background-color: var(--bg-color-4);
+  font-size: 1rem;
+  width: 3rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  transform: translate(50px, -20px);
+  color: var(--text-color-1);
+}
+
+.notes.on::before {
+  content: "ON";
+  background-color: var(--bg-color-2);
 }
 </style>

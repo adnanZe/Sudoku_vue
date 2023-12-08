@@ -12,11 +12,13 @@ export interface Store {
 interface Methods {
     onSelectCell: (id: number) => void;
     onAddNumber: (value: string) => void;
+    onNotes: () => void;
 }
 
 const gameState: SudokuState = reactive({
     cells: cellsSudoku,
-    selectedCell: cellsSudoku[0]
+    selectedCell: cellsSudoku[0],
+    isActiveNotes: false,
 });
 
 const methods = {
@@ -27,8 +29,11 @@ const methods = {
 
     onAddNumber: (value: string) => {
         handleAddNumber(value)
-
     },
+
+    onNotes: () => {
+        gameState.isActiveNotes = !gameState.isActiveNotes;
+    }
 }
 
 const handleSelectCell = (id: number) => {
