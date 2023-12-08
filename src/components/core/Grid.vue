@@ -3,6 +3,8 @@ import { inject } from "vue";
 import { Store, storeKey } from "../../store";
 
 const store = inject<Store>(storeKey)!;
+
+console.log(store.gameState.cells);
 </script>
 
 <template>

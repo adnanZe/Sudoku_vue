@@ -1,5 +1,6 @@
 import { makepuzzle as generateSudokuNumbers } from "sudoku";
 import { CellState } from "../model/sudoku";
+import getListOfIdsAssociated from "./rowColumnSquare";
 
 
 
@@ -19,6 +20,6 @@ export function generateInitialSudokuState(): CellState[] {
         isReadOnly: value !== "",
         hasAssociatedValue: false,
         hasWrongValue: false,
-        associatedCellsId: []
+        associatedCellsId: getListOfIdsAssociated(index)
     }));
 }

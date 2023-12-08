@@ -10,5 +10,5 @@ export interface CellState {
     isReadOnly: boolean;
     hasAssociatedValue: boolean;
     hasWrongValue: boolean;
-    associatedCellsId: string[];
+    associatedCellsId: number[];
 }
