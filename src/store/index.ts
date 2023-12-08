@@ -23,12 +23,19 @@ const methods = {
         gameState.cells.forEach(cell => {
             if (cell.id === id) {
                 gameState.selectedCell = cell;
-                cell.isSelected = true
+                cell.isSelected = true;
             } else if (cell.isSelected) {
-                cell.isSelected = false
+                cell.isSelected = false;
             }
         });
+        checkAssociatedCells();
     }
+}
+
+const checkAssociatedCells = () => {
+    gameState.cells.forEach(cell => {
+        cell.hasAssociatedValue = gameState.selectedCell.associatedCellsId.includes(cell.id);
+    });
 }
 
 

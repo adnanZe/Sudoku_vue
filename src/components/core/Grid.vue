@@ -11,7 +11,10 @@ console.log(store.gameState.cells);
   <section>
     <div
       v-for="cell in store.gameState.cells"
-      :class="cell.isSelected ? 'active' : ''"
+      :class="[
+        cell.isSelected ? 'active' : '',
+        cell.hasAssociatedValue ? 'associated' : '',
+      ]"
       @click="store.methods.onSelectCell(cell.id)">
       {{ cell.value }}
     </div>
@@ -37,5 +40,9 @@ div {
 
 .active {
   background-color: var(--bg-color-3);
+}
+
+.associated {
+  background-color: var(--bg-color-4);
 }
 </style>
