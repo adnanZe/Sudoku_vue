@@ -28,7 +28,16 @@ section {
   display: grid;
   grid-template-columns: repeat(9, 60px);
   grid-template-rows: repeat(9, 60px);
-  grid-gap: 1px;
+  grid-gap: 2px;
+}
+
+section > :nth-child(3n) {
+  margin-right: 4px;
+}
+
+section > div:nth-child(n + 19):nth-child(-n + 27),
+section > div:nth-child(n + 46):nth-child(-n + 54) {
+  margin-bottom: 4px;
 }
 
 div {
