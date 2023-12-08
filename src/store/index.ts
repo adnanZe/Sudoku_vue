@@ -11,7 +11,7 @@ export interface Store {
 
 interface Methods {
     onSelectCell: (id: number) => void;
-    onAddNumber: (value: number) => void;
+    onAddNumber: (value: string) => void;
 }
 
 const gameState: SudokuState = reactive({
@@ -25,7 +25,7 @@ const methods = {
         checkAssociatedCellsAndMatchingNumbers();
     },
 
-    onAddNumber: (value: number) => {
+    onAddNumber: (value: string) => {
         handleAddNumber(value)
 
     },
@@ -42,7 +42,7 @@ const handleSelectCell = (id: number) => {
     });
 }
 
-const handleAddNumber = (value: number) => {
+const handleAddNumber = (value: string) => {
     gameState.selectedCell.value = gameState.selectedCell.isReadOnly ? gameState.selectedCell.value : value.toString();
     checkWrongNumber();
 }
@@ -51,6 +51,7 @@ const checkWrongNumber = () => {
     gameState.cells.forEach((cell: CellState) => {
         cell.hasWrongValue = false;
         gameState.cells.forEach((cellToCompare: CellState) => {
+            cell.hasAssociatedValue = cell.value ? cell.value === gameState.selectedCell.value : false;
             if (
                 cell.value == cellToCompare.value &&
                 cell.value &&

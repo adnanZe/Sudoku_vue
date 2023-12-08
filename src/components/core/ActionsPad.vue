@@ -12,7 +12,7 @@ const store = inject<Store>(storeKey)!;
     <button id="undo" class="undo" @click="">
       <i class="fa-solid fa-rotate-left"></i>
     </button>
-    <button id="erase" class="erase" @click="">
+    <button id="erase" class="erase" @click="store.methods.onAddNumber('')">
       <i class="fa-solid fa-eraser"></i>
     </button>
     <button class="notes" id="notes" @click="">
@@ -22,7 +22,7 @@ const store = inject<Store>(storeKey)!;
       class="number"
       v-for="number in NUMBERS_PAD"
       :key="number"
-      @click="store.methods.onAddNumber(+number)">
+      @click="store.methods.onAddNumber(number)">
       {{ number }}
     </button>
   </section>
