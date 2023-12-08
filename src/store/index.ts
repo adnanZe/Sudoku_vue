@@ -48,7 +48,17 @@ const handleSelectCell = (id: number) => {
 }
 
 const handleAddNumber = (value: string) => {
-    gameState.selectedCell.value = gameState.selectedCell.isReadOnly ? gameState.selectedCell.value : value.toString();
+    if (gameState.selectedCell.isReadOnly) return;
+    if (gameState.isActiveNotes) {
+        if (Array.isArray(gameState.selectedCell.value)) {
+            gameState.selectedCell.value[Number(value) - 1] = value;
+        } else {
+            gameState.selectedCell.value = Array(9).fill("");
+            gameState.selectedCell.value[Number(value) - 1] = value;
+        }
+    } else {
+        gameState.selectedCell.value = value;
+    }
     checkWrongNumber();
 }
 

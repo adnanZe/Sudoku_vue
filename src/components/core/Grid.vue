@@ -15,9 +15,16 @@ const store = inject<Store>(storeKey)!;
         cell.isReadOnly ? 'generated' : '',
         cell.hasWrongValue ? 'wrong' : '',
         cell.hasAssociatedValue ? 'match-number' : '',
+        Array.isArray(cell.value) ? 'display-notes' : '',
       ]"
       @click="store.methods.onSelectCell(cell.id)">
-      {{ cell.value }}
+      <span
+        class="notes-number"
+        v-if="Array.isArray(cell.value)"
+        v-for="value in cell.value">
+        {{ value }}
+      </span>
+      <span v-else>{{ cell.value }}</span>
     </div>
   </section>
 </template>
@@ -70,5 +77,17 @@ div {
 }
 .active {
   background-color: var(--bg-color-3);
+}
+
+.display-notes {
+  background-color: var(--bg-color-2);
+  display: grid;
+  grid-template-columns: repeat(3, 19px);
+  grid-template-rows: repeat(3, 19px);
+  text-align: center;
+}
+
+.notes-number {
+  font-size: 16px;
 }
 </style>

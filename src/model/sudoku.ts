@@ -6,7 +6,7 @@ export interface SudokuState {
 
 export interface CellState {
     id: number;
-    value: string;
+    value: string | string[];
     isSelected: boolean;
     isReadOnly: boolean;
     isAssociated: boolean;
