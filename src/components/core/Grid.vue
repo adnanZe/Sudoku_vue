@@ -3,8 +3,6 @@ import { inject } from "vue";
 import { Store, storeKey } from "../../store";
 
 const store = inject<Store>(storeKey)!;
-
-console.log(store.gameState.cells);
 </script>
 
 <template>
@@ -15,6 +13,7 @@ console.log(store.gameState.cells);
         cell.isSelected ? 'active' : '',
         cell.hasAssociatedValue ? 'associated' : '',
         cell.isReadOnly ? 'generated' : '',
+        cell.hasWrongValue ? 'wrong' : '',
       ]"
       @click="store.methods.onSelectCell(cell.id)">
       {{ cell.value }}
@@ -51,11 +50,20 @@ div {
   background-color: var(--bg-color-4);
 }
 
-.active {
-  background-color: var(--bg-color-3);
-}
-
 .generated {
   color: var(--text-color);
+}
+
+.wrong {
+  color: var(--text-danger);
+  background-color: var(--bg-danger);
+}
+
+.wrong.generated {
+  color: var(--text-danger-2);
+  background-color: var(--bg-danger-2);
+}
+.active {
+  background-color: var(--bg-color-3);
 }
 </style>

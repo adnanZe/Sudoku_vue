@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import { inject } from "vue";
 import { NUMBERS_PAD } from "../../model/constants";
+import { Store, storeKey } from "../../store";
+
+const store = inject<Store>(storeKey)!;
 </script>
 
 <template>
@@ -18,7 +22,7 @@ import { NUMBERS_PAD } from "../../model/constants";
       class="number"
       v-for="number in NUMBERS_PAD"
       :key="number"
-      @click="">
+      @click="store.methods.onAddNumber(+number)">
       {{ number }}
     </button>
   </section>
