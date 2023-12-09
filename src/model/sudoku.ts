@@ -2,6 +2,12 @@ export interface SudokuState {
     cells: CellState[];
     selectedCell: CellState;
     isActiveNotes: boolean;
+    history: History[];
+}
+
+interface History {
+    value: string | string[];
+    id: number;
 }
 
 export interface CellState {

@@ -13,18 +13,19 @@ interface Methods {
     onSelectCell: (id: number) => void;
     onAddNumber: (value: string) => void;
     onNotes: () => void;
+    onUndo: () => void;
 }
 
 const gameState: SudokuState = reactive({
     cells: cellsSudoku,
     selectedCell: cellsSudoku[0],
     isActiveNotes: false,
+    history: [],
 });
 
 const methods = {
     onSelectCell: (id: number) => {
         handleSelectCell(id);
-        checkAssociatedCellsAndMatchingNumbers();
     },
 
     onAddNumber: (value: string) => {
@@ -33,22 +34,46 @@ const methods = {
 
     onNotes: () => {
         gameState.isActiveNotes = !gameState.isActiveNotes;
+    },
+
+    onUndo: () => {
+        handleUndo();
     }
+}
+
+const handleUndo = () => {
+    if (gameState.history.length > 0) {
+        const lastCell = gameState.history.pop();
+        if (lastCell) {
+            gameState.cells[lastCell.id].value = lastCell.value;
+            handleSelectCell(lastCell.id);
+            checkWrongNumber();
+        }
+    }
+}
+
+const addHistory = (cell: CellState) => {
+    gameState.history.push({ value: cell.value, id: cell.id });
+
 }
 
 const handleSelectCell = (id: number) => {
     gameState.cells.forEach(cell => {
         if (cell.id === id) {
-            gameState.selectedCell = reactive(cell);
+            gameState.selectedCell = cell;
             cell.isSelected = true;
         } else if (cell.isSelected) {
             cell.isSelected = false;
         }
     });
+
+    checkAssociatedCellsAndMatchingNumbers();
 }
 
 const handleAddNumber = (value: string) => {
     if (gameState.selectedCell.isReadOnly) return;
+    addHistory(gameState.selectedCell);
+
     if (gameState.isActiveNotes) {
         if (Array.isArray(gameState.selectedCell.value)) {
             gameState.selectedCell.value[Number(value) - 1] = value === gameState.selectedCell.value[Number(value) - 1] ? "" : value;
