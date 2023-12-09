@@ -80,7 +80,6 @@ div {
 }
 
 .display-notes {
-  background-color: var(--bg-color-2);
   display: grid;
   grid-template-columns: repeat(3, 19px);
   grid-template-rows: repeat(3, 19px);
