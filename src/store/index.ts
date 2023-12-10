@@ -53,7 +53,17 @@ const handleUndo = () => {
 }
 
 const addHistory = (cell: CellState) => {
-    gameState.history.push({ value: cell.value, id: cell.id });
+    const id = cell.id;
+    let value: string | string[];
+
+    if (Array.isArray(cell.value)) {
+        value = [...cell.value];
+
+    } else {
+        value = cell.value;
+    }
+
+    gameState.history.push({ value, id });
 
 }
 
