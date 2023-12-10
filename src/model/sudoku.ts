@@ -4,6 +4,7 @@ export interface SudokuState {
     isActiveNotes: boolean;
     history: History[];
     time: Timer;
+    isWinner: boolean;
 }
 
 interface Timer {

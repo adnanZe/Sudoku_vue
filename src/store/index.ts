@@ -28,7 +28,8 @@ const gameState: SudokuState = reactive({
         time: 0,
         isActive: true,
         timerInterval: null
-    }
+    },
+    isWinner: false
 });
 
 const methods = {
@@ -64,7 +65,11 @@ const methods = {
 const handleTimer = () => {
     gameState.time.isActive = !gameState.time.isActive;
     if (gameState.time.isActive) {
-        startTimer();
+        if (gameState.isWinner) {
+            handleNewGame();
+        } else {
+            startTimer();
+        }
     } else {
         pauseTimer();
     }
@@ -95,8 +100,8 @@ const handleNewGame = () => {
         time: 0,
         isActive: true,
         timerInterval: null
-    }
-
+    };
+    gameState.isWinner = false;
     startTimer();
 }
 const handleUndo = () => {
@@ -171,6 +176,8 @@ const checkWrongNumber = () => {
             }
         });
     });
+
+    checkIfSudokuIsComplete();
 }
 
 const checkAssociatedCellsAndMatchingNumbers = () => {
@@ -178,6 +185,15 @@ const checkAssociatedCellsAndMatchingNumbers = () => {
         cell.isAssociated = gameState.selectedCell.associatedCellsId.includes(cell.id);
         cell.hasAssociatedValue = cell.value ? cell.value === gameState.selectedCell.value : false;
     });
+}
+
+const checkIfSudokuIsComplete = () => {
+    gameState.isWinner =
+        gameState.cells.every(cell => cell.value && cell.value !== "" && !Array.isArray(cell.value) && !cell.hasWrongValue);
+
+    if (gameState.isWinner) {
+        pauseTimer();
+    }
 }
 
 

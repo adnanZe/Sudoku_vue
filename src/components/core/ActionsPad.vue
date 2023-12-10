@@ -5,7 +5,6 @@ import { Store, storeKey } from "../../store";
 
 onMounted(() => {
   store.methods.startTimer();
-  console.log("hit");
 });
 
 const store = inject<Store>(storeKey)!;
@@ -69,11 +68,12 @@ const store = inject<Store>(storeKey)!;
   justify-content: center;
   border-radius: 7px;
   color: var(--text-color-1);
+  cursor: pointer;
 }
 section {
   display: grid;
   grid-template-columns: repeat(3, 75px);
-  grid-template-rows: repeat(5, 75px);
+  grid-template-rows: repeat(6, 75px);
   row-gap: 20px;
   column-gap: 5px;
   margin-left: 30px;

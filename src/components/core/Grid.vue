@@ -12,7 +12,7 @@ const isVisible = computed(
 </script>
 
 <template>
-  <section>
+  <section v-if="!store.gameState.isWinner">
     <div
       v-for="cell in store.gameState.cells"
       :class="[
@@ -34,9 +34,17 @@ const isVisible = computed(
       <span v-else :style="isVisible">{{ cell.value }}</span>
     </div>
   </section>
+  <section v-else>
+    <h1>WINNER!!!</h1>
+  </section>
 </template>
 
 <style scoped>
+h1 {
+  font-size: 3rem;
+  grid-column: 3 / -1;
+  grid-row: 3 / -1;
+}
 section {
   margin: 1.5rem 0;
   display: grid;
