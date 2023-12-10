@@ -8,7 +8,9 @@ const store = inject<Store>(storeKey)!;
 
 <template>
   <section>
-    <button id="new-game" class="new-game" @click="">New Game</button>
+    <button id="new-game" class="new-game" @click="store.methods.onNewGame()">
+      New Game
+    </button>
     <button id="undo" class="undo" @click="store.methods.onUndo()">
       <i class="fa-solid fa-rotate-left"></i>
     </button>

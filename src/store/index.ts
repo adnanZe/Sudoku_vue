@@ -14,6 +14,7 @@ interface Methods {
     onAddNumber: (value: string) => void;
     onNotes: () => void;
     onUndo: () => void;
+    onNewGame: () => void;
 }
 
 const gameState: SudokuState = reactive({
@@ -38,9 +39,20 @@ const methods = {
 
     onUndo: () => {
         handleUndo();
+    },
+
+    onNewGame: () => {
+        handleNewGame();
     }
 }
 
+const handleNewGame = () => {
+    gameState.cells = generateInitialSudokuState();
+    gameState.selectedCell = gameState.cells[0];
+    gameState.isActiveNotes = false;
+    gameState.history = [];
+
+}
 const handleUndo = () => {
     if (gameState.history.length > 0) {
         const lastCell = gameState.history.pop();
@@ -51,6 +63,7 @@ const handleUndo = () => {
         }
     }
 }
+
 
 const addHistory = (cell: CellState) => {
     const id = cell.id;
