@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { StyleValue, computed, inject } from "vue";
 import { Store, storeKey } from "../../store";
 
 const store = inject<Store>(storeKey)!;
+const isVisible = computed(
+  () =>
+    ({
+      visibility: store.gameState.time.isActive ? "visible" : "hidden",
+    } as StyleValue)
+);
 </script>
 
 <template>
@@ -21,10 +27,11 @@ const store = inject<Store>(storeKey)!;
       <span
         class="notes-number"
         v-if="Array.isArray(cell.value)"
-        v-for="value in cell.value">
+        v-for="value in cell.value"
+        :style="isVisible">
         {{ value }}
       </span>
-      <span v-else>{{ cell.value }}</span>
+      <span v-else :style="isVisible">{{ cell.value }}</span>
     </div>
   </section>
 </template>
