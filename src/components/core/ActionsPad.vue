@@ -8,6 +8,16 @@ const store = inject<Store>(storeKey)!;
 
 <template>
   <section>
+    <section class="timer" @click="store.methods.onTimer()">
+      <span
+        >{{
+          ("0" + Math.floor((store.gameState.time.time / 60) % 60)).slice(-2)
+        }}:</span
+      >
+      <span>{{
+        ("0" + Math.floor(store.gameState.time.time % 60)).slice(-2)
+      }}</span>
+    </section>
     <button id="new-game" class="new-game" @click="store.methods.onNewGame()">
       New Game
     </button>

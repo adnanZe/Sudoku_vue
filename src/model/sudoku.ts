@@ -3,6 +3,12 @@ export interface SudokuState {
     selectedCell: CellState;
     isActiveNotes: boolean;
     history: History[];
+    time: Timer;
+}
+
+interface Timer {
+    time: number;
+    isActive: boolean;
 }
 
 interface History {

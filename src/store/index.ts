@@ -15,6 +15,7 @@ interface Methods {
     onNotes: () => void;
     onUndo: () => void;
     onNewGame: () => void;
+    onTimer: () => void;
 }
 
 const gameState: SudokuState = reactive({
@@ -22,6 +23,10 @@ const gameState: SudokuState = reactive({
     selectedCell: cellsSudoku[0],
     isActiveNotes: false,
     history: [],
+    time: {
+        time: 0,
+        isActive: false
+    }
 });
 
 const methods = {
@@ -43,6 +48,25 @@ const methods = {
 
     onNewGame: () => {
         handleNewGame();
+    },
+
+    onTimer: () => {
+        handleTimer();
+
+    }
+}
+
+const handleTimer = () => {
+    gameState.time.isActive = !gameState.time.isActive;
+    if (gameState.time.isActive) {
+        gameState.time.time = 0;
+        const interval = setInterval(() => {
+            gameState.time.time++;
+        }, 1000);
+        setTimeout(() => {
+            clearInterval(interval);
+            gameState.time.isActive = false;
+        }, 1000 * 60 * 60);
     }
 }
 
@@ -51,7 +75,10 @@ const handleNewGame = () => {
     gameState.selectedCell = gameState.cells[0];
     gameState.isActiveNotes = false;
     gameState.history = [];
-
+    gameState.time = {
+        time: 0,
+        isActive: false
+    }
 }
 const handleUndo = () => {
     if (gameState.history.length > 0) {
