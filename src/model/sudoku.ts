@@ -9,6 +9,7 @@ export interface SudokuState {
 interface Timer {
     time: number;
     isActive: boolean;
+    timerInterval: null | ReturnType<typeof setInterval>;
 }
 
 interface History {

@@ -16,6 +16,7 @@ interface Methods {
     onUndo: () => void;
     onNewGame: () => void;
     onTimer: () => void;
+    startTimer: () => void;
 }
 
 const gameState: SudokuState = reactive({
@@ -25,7 +26,8 @@ const gameState: SudokuState = reactive({
     history: [],
     time: {
         time: 0,
-        isActive: false
+        isActive: true,
+        timerInterval: null
     }
 });
 
@@ -52,22 +54,34 @@ const methods = {
 
     onTimer: () => {
         handleTimer();
+    },
 
+    startTimer: () => {
+        startTimer();
     }
 }
 
 const handleTimer = () => {
     gameState.time.isActive = !gameState.time.isActive;
     if (gameState.time.isActive) {
-        gameState.time.time = 0;
-        const interval = setInterval(() => {
-            gameState.time.time++;
-        }, 1000);
-        setTimeout(() => {
-            clearInterval(interval);
-            gameState.time.isActive = false;
-        }, 1000 * 60 * 60);
+        startTimer();
+    } else {
+        pauseTimer();
     }
+}
+
+const startTimer = () => {
+    gameState.time.isActive = true;
+    gameState.time.timerInterval = setInterval(() => {
+        gameState.time.time++;
+    }, 1000);
+}
+
+const pauseTimer = () => {
+    if (gameState.time.timerInterval) {
+        clearInterval(gameState.time.timerInterval);
+    }
+    gameState.time.isActive = false;
 }
 
 const handleNewGame = () => {
@@ -75,10 +89,15 @@ const handleNewGame = () => {
     gameState.selectedCell = gameState.cells[0];
     gameState.isActiveNotes = false;
     gameState.history = [];
+
+    pauseTimer();
     gameState.time = {
         time: 0,
-        isActive: false
+        isActive: true,
+        timerInterval: null
     }
+
+    startTimer();
 }
 const handleUndo = () => {
     if (gameState.history.length > 0) {
@@ -90,7 +109,6 @@ const handleUndo = () => {
         }
     }
 }
-
 
 const addHistory = (cell: CellState) => {
     const id = cell.id;
@@ -161,7 +179,6 @@ const checkAssociatedCellsAndMatchingNumbers = () => {
         cell.hasAssociatedValue = cell.value ? cell.value === gameState.selectedCell.value : false;
     });
 }
-
 
 
 export default <Store>{

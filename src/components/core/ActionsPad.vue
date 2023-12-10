@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { inject, onMounted } from "vue";
 import { NUMBERS_PAD } from "../../model/constants";
 import { Store, storeKey } from "../../store";
+
+onMounted(() => {
+  store.methods.startTimer();
+  console.log("hit");
+});
 
 const store = inject<Store>(storeKey)!;
 </script>
 
 <template>
   <section>
-    <section class="timer" @click="store.methods.onTimer()">
+    <div class="timer" @click="store.methods.onTimer()">
       <span
         >{{
           ("0" + Math.floor((store.gameState.time.time / 60) % 60)).slice(-2)
@@ -17,7 +22,11 @@ const store = inject<Store>(storeKey)!;
       <span>{{
         ("0" + Math.floor(store.gameState.time.time % 60)).slice(-2)
       }}</span>
-    </section>
+      <div class="timer-symbol">
+        <i class="fa-solid fa-pause" v-if="store.gameState.time.isActive"></i>
+        <i class="fa-solid fa-play" v-else></i>
+      </div>
+    </div>
     <button id="new-game" class="new-game" @click="store.methods.onNewGame()">
       New Game
     </button>
@@ -44,6 +53,23 @@ const store = inject<Store>(storeKey)!;
 </template>
 
 <style scoped>
+.timer-symbol {
+  position: absolute;
+  right: 50px;
+  margin-left: 10px;
+}
+.timer {
+  position: relative;
+  grid-column: 1 / 4;
+  grid-row: 1;
+  font-size: 2rem;
+  background-color: rgba(50, 50, 50, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: var(--text-color-1);
+}
 section {
   display: grid;
   grid-template-columns: repeat(3, 75px);
