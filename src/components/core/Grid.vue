@@ -41,7 +41,7 @@ const isVisible = computed(
 
 <style scoped>
 h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   grid-column: 3 / -1;
   grid-row: 3 / -1;
 }
